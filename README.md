@@ -66,8 +66,11 @@ To authorization σε κάθε endpoint μετά το login γίνεται με 
 2. Αν το endpoint εκτελεί λειτουργία χρήστη, τότε το session id περνάται στη συνάρτηση is_user_session_valid και ελέγχεται εάν το uuid βρίσκεται μέσα στο user_sessions.
 3. Αν το endpoint εκτελεί λειτουργία διαχειριστή, τότε το session id περνάται στη συνάρτηση is_admin_session_valid και ελέγχεται εάν το uuid βρίσκεται μέσα στο admin_sessions. 
 4. Στα endpoints με λειτουργίες χρήστη που απαιτούν την αναζήτηση του χρήστη μέσα στο collection, μετά το authentication του, με τη χρήση του user1 = users_sessions.get(uuid), λαμβάνουμε απο το dictionary user_sessions το value που αντιστοιχεί στο key με τιμή το uuid του χρήστη. Το value που μας επιστρέφεται στο user1 είναι μια λίστα όπου στη θέση 0 βρίσκεται το email του χρήστη και στη θέση 1 η χρονική στιγμή που έκανε login. Κάνοντας χρήση του user1[0] λοιπόν μπορούμε να αναζητήσουμε τον χρήστη στο collection Users. 
+> Παράδειγμα εκτέλεσης
 
 ![user auth](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/ccf75483ca7fad1c011f9f22e06db3f5c0dba978/images/users/auth.png)
+
+## Λειτουργίες Απλού Χρήστη
 
 ### Αναζήτηση Προϊόντος (/searchProduct)
 Για την αναζήτηση προϊόντος, ο χρήστης εισάγει είται το όνομα, είτε την κατηγορία, είτε το id του προϊόντος καθώς και το session id του. Αφού γίνει authorized, ελέγχεται το input που έδωσε και με την συνάρτηση *find()* αναζητούνται τα προϊόντα με βάση το κριτήριο που δώθηκε και επιστρέφονται στο **product_list**. Με ένα for loop εκτυπώνονται οι πληροφορίες για κάθε προϊόν στο product_list. Αν δεν βρεθεί κανένα προϊόν, εμφανίζεται ανάλογο αποτέλεσμα. 
@@ -122,3 +125,27 @@ To authorization σε κάθε endpoint μετά το login γίνεται με 
 
 ![delete user](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/6f376a193d97e3ce9263758754478c2af612dd90/images/users/delete%20acc/delete1.png)
 ![wrong user del](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/6f376a193d97e3ce9263758754478c2af612dd90/images/users/delete%20acc/wdelet.png)
+
+## Λειτουργίες Διαχειρηστή
+
+### Εισαγωγλη νέου προϊόντος
+
+Για να εισάηγει ένας διαχειρηστής ένα νέο προϊόν στο collection Products, πρέπει να δώσει ως data το **"name", "category", "stock", "price" και "description"**, καθώς και το session id του. Αφού αυθεντικοποιηθεί ως διαχειρηστής, τότε το προϊόν γίνεται inserted στο collection products με τις πληροφορίες που δώθηκαν απο αυτόν. Στη περίπτωση που πάει να εκτελέσει αυτή τη λειτουργία κάποιος απλός πελάτης, τότε εμφανίζεται ανάλογο μήνυμα αποτυχίας.
+> Παραδειγματα εκτέλεσης
+
+![add product](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/add%20product/addprod.png)
+![wrong add prod](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/add%20product/wrongadd.png)
+
+### Διαγραφή προϊόντος απο το σύστημα
+
+Για την διαγραφή ενός προϊόντος απο τη βάση, ο διαχειρηστής εισάγει το id του προϊόντος που θέλει να διαγράψει, μαζί με το session id του. Αφού αυθεντικοποιηθεί ως διαχειρηστής, αναζητείται το id που εισήαγε στο collection products και επιστρέφεται το προϊόν που αντιστοιχεί σε αυτό. Αν βρεθεί τότε γίνεται delete απο το products collection με βαση το id του. Αν δεν βρεθεί, τότε εμφανίζεται ανάλογο μήνυμα αποτυχίας.
+> Παραδειγμα εκτέλεσης
+
+![delete product](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/delete%20product/deleteprod.png)
+
+### Ενημέρωση προϊόντος
+
+Για να ενημερώσει ένα ή παραπάνω πεδία για ένα συγκεκριμένο προϊόν, ο διαχειρηστής πρέπει να εισάγει το id του προϊόντος που θέλει να ενημερώσει μαζί με το ποια πεδία θέλει να ενημερώσει και πώς (name, category, stock, price), καθώς και το session id του. Μόλις αυθεντικοποιηθεί ως διαχειρηστής, τότε αναζητείται το προϊόν προς ενημέρωση στο collection products και αν βρεθεί ελέγχεται ένα ένα τα πιθανά πεδία αν περιλαμβάνονται στο data και αν ναι τότε τα ενημερώνει με τη νέα τιμή τους. Μετά τις ενημερώσεις, αναζητείται εκ νέου το προϊόν για να τυπωθούν οι αλλαγές που έγιναν σε αυτό. Αν το προϊόν δεν βρεθεί, τότε εμφανίζεται ανάλογο μήνυμα αποτυχίας.
+> Παραδειγμα εκτελεσης
+
+![update prod](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/update%20product/updateprod.png)
