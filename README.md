@@ -128,7 +128,7 @@ To authorization σε κάθε endpoint μετά το login γίνεται με 
 
 ## Λειτουργίες Διαχειρηστή
 
-### Εισαγωγλη νέου προϊόντος
+### Εισαγωγλη νέου προϊόντος (/addProduct)
 
 Για να εισάηγει ένας διαχειρηστής ένα νέο προϊόν στο collection Products, πρέπει να δώσει ως data το **"name", "category", "stock", "price" και "description"**, καθώς και το session id του. Αφού αυθεντικοποιηθεί ως διαχειρηστής, τότε το προϊόν γίνεται inserted στο collection products με τις πληροφορίες που δώθηκαν απο αυτόν. Στη περίπτωση που πάει να εκτελέσει αυτή τη λειτουργία κάποιος απλός πελάτης, τότε εμφανίζεται ανάλογο μήνυμα αποτυχίας.
 > Παραδειγματα εκτέλεσης
@@ -136,16 +136,51 @@ To authorization σε κάθε endpoint μετά το login γίνεται με 
 ![add product](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/add%20product/addprod.png)
 ![wrong add prod](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/add%20product/wrongadd.png)
 
-### Διαγραφή προϊόντος απο το σύστημα
+### Διαγραφή προϊόντος απο το σύστημα (/deleteProduct)
 
 Για την διαγραφή ενός προϊόντος απο τη βάση, ο διαχειρηστής εισάγει το id του προϊόντος που θέλει να διαγράψει, μαζί με το session id του. Αφού αυθεντικοποιηθεί ως διαχειρηστής, αναζητείται το id που εισήαγε στο collection products και επιστρέφεται το προϊόν που αντιστοιχεί σε αυτό. Αν βρεθεί τότε γίνεται delete απο το products collection με βαση το id του. Αν δεν βρεθεί, τότε εμφανίζεται ανάλογο μήνυμα αποτυχίας.
 > Παραδειγμα εκτέλεσης
 
 ![delete product](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/delete%20product/deleteprod.png)
 
-### Ενημέρωση προϊόντος
+### Ενημέρωση προϊόντος (/updateProduct)
 
 Για να ενημερώσει ένα ή παραπάνω πεδία για ένα συγκεκριμένο προϊόν, ο διαχειρηστής πρέπει να εισάγει το id του προϊόντος που θέλει να ενημερώσει μαζί με το ποια πεδία θέλει να ενημερώσει και πώς (name, category, stock, price), καθώς και το session id του. Μόλις αυθεντικοποιηθεί ως διαχειρηστής, τότε αναζητείται το προϊόν προς ενημέρωση στο collection products και αν βρεθεί ελέγχεται ένα ένα τα πιθανά πεδία αν περιλαμβάνονται στο data και αν ναι τότε τα ενημερώνει με τη νέα τιμή τους. Μετά τις ενημερώσεις, αναζητείται εκ νέου το προϊόν για να τυπωθούν οι αλλαγές που έγιναν σε αυτό. Αν το προϊόν δεν βρεθεί, τότε εμφανίζεται ανάλογο μήνυμα αποτυχίας.
 > Παραδειγμα εκτελεσης
 
 ![update prod](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/7c2d6c2c6909b60fe924225d61ec073f614ec3b4/images/admin%20/update%20product/updateprod.png)
+
+## Containerization
+
+Για την διαδικασία του containerization, δημιουργούμε ένα φάκελο "project" ο οποίος έχει τη παρακάτω μορφή:
+
+![folder](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/folder.png)
+![project](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/project.png)
+> project folder περιεχόμενα
+
+![flask](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/flask.png)
+> flask folder περιεχόμενα
+
+![data](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/data.png)
+> data folder περιεχόμενα
+
+![dockerfile](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/dockerfile.png)
+> Dockerfile κωδικας
+
+![yml](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/docker-compose.png)
+> yml κωδικας
+
+![prepare data](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/prepare-data.png)
+> prepare_data.py κωδικας
+
+Με την εντολή **"docker-compose build"** χτίζουμε το flask-service 
+
+![build1](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/build1.png)
+![build2](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/build2.png)
+
+με την ολοκλήρωση του, ενεργοποιούμε το flask service με την εντολή **"docker-compose up -d"**.
+
+![run1](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/run1.png)
+![run2](https://github.com/moonxsugar/Ergasia2_E18130_Nomiki_Parginou/blob/efc2a3e545be1a46f50e6581a0c37deddd90a090/images/container/run2.png)
+
+Αφού ενεργοποιήθηκε με επιτυχία, είμαστε πλέον έτοιμοι για την χρήση του.
