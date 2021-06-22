@@ -1,0 +1,27 @@
+{
+    "_id": {
+        "$oid": "5e99cb577a781a4aac69da3a"
+    },
+    "username": "nomiki",
+    "email": "nomikipar@gmail.com",
+    "password": "p@ssW0rd",
+    "category": "admin"
+}
+{
+    "_id": {
+        "$oid": "5e99cb577a781a4aac69da3b"
+    },
+    "username": "ericksonpope",
+    "email": "ericksonpope@gmail.com",
+    "password": "baABwib2i",
+    "category": "simple user"
+}
+{
+    "_id": {
+        "$oid": "5e99cb577a781a4aac69da3c"
+    },
+    "username": "davenport",
+    "email": "davenport@yahoo.com",
+    "password": "abaKX28",
+    "category": "simple user"
+}
